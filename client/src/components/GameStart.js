@@ -15,6 +15,10 @@ export default class GameStart extends Component {
 		this.setState({ backpackDisplay: 'flex' });
 	};
 
+	modoClose = () => {
+		this.setState({ backpackDisplay: 'none' });
+	};
+
 	render() {
 		console.log(baseStat);
 
@@ -35,14 +39,59 @@ export default class GameStart extends Component {
 				</div>
 				<div className="start-modoBackGround" style={{ display: this.state.backpackDisplay }}>
 					<div className="start-popupModo">
-						<ul>
-							<li>Talent: {baseStat.yourTalent}</li>
-							<li>HP: {baseStat.hp}</li>
-							<li>MP: {baseStat.mp}</li>
-							<li>STR: {baseStat.str}</li>
-							<li>DEX: {baseStat.dex}</li>
-							<li>INT: {baseStat.int}</li>
-						</ul>
+						<button type="button" className="start-modoClose" onClick={this.modoClose}>
+							X
+						</button>
+						<div className="start-modoStatDiv">
+							<ul className="start-modoStatList">
+								<li>Talent: {baseStat.yourTalent}</li>
+								<li>HP: {baseStat.hp}</li>
+								<li>MP: {baseStat.mp}</li>
+								<li>STR: {baseStat.str}</li>
+								<li>DEX: {baseStat.dex}</li>
+								<li>INT: {baseStat.int}</li>
+							</ul>
+						</div>
+						<div className="start-modoEquipDiv">
+							<div>
+								<div className="start-modoEquipBox start-modoEquipBox-1" />
+								<div className="start-modoEquipBox start-modoEquipBox-2" />
+							</div>
+							<div>
+								<div className="start-modoEquipBox start-modoEquipBox-3" />
+								<div className="start-modoEquipBox start-modoEquipBox-4" />
+							</div>
+						</div>
+						<div className="start-modoInv">
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+							<div className="start-modoInvBox" />
+						</div>
 					</div>
 				</div>
 				<footer className="start-inventory">
