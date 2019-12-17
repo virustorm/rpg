@@ -110,7 +110,7 @@
 }
 
 .start {
-  height: 100vh;
+  height: 100%;
 }
 
 .start-statDiv {
@@ -128,6 +128,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-animation: shrinkIntoIcon 3s forwards;
+          animation: shrinkIntoIcon 3s forwards;
 }
 
 .start-title {
@@ -150,6 +152,10 @@
 .start-inventoryImg {
   width: 50px;
   height: 50px;
+}
+
+.start-inventoryImg:hover {
+  cursor: pointer;
 }
 
 .start-modoBackGround {
@@ -198,8 +204,14 @@
   cursor: pointer;
 }
 
+.start-modoClose:focus {
+  outline: none;
+}
+
 .start-modoStatList {
   list-style: none;
+  padding: 0;
+  text-align: center;
 }
 
 .start-modoStatDiv {
@@ -213,21 +225,33 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
 }
 
 .start-modoEquipDiv {
   width: 20%;
+  position: relative;
+}
+
+.start-modoEquipaDiv {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  height: 50%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: 100%;
   margin: auto 0;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.start-modoEquipTitle {
+  position: absolute;
+  left: 1%;
+  top: 1%;
+  width: 100%;
+  text-align: center;
 }
 
 .start-modoEquipBox {
@@ -253,20 +277,47 @@
   background-image: url("../assets/icons/leg-armor.svg");
 }
 
-.start-modoInv {
+.start-modoInvDiv {
   width: 30%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.start-modoInvTitle {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  width: 100%;
+  text-align: center;
+}
+
+.start-modoInv {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-flow: wrap;
       flex-flow: wrap;
+  height: 85%;
 }
 
 .start-modoInvBox {
   width: 50px;
   height: 50px;
-  border: 1px solid red;
+  border: 1px solid black;
   margin: 5px;
+}
+
+.start-modoStatTitle {
+  position: absolute;
+  left: 1%;
+  top: 1%;
+  text-align: center;
+  width: 100%;
 }
 
 @-webkit-keyframes shrinkIntoIcon {
@@ -274,13 +325,13 @@
     -webkit-transform: scale(1);
             transform: scale(1);
   }
-  25% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+  75% {
+    margin-top: 30%;
   }
   100% {
     -webkit-transform: scale(0);
             transform: scale(0);
+    display: none;
   }
 }
 
@@ -289,13 +340,13 @@
     -webkit-transform: scale(1);
             transform: scale(1);
   }
-  25% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+  75% {
+    margin-top: 30%;
   }
   100% {
     -webkit-transform: scale(0);
             transform: scale(0);
+    display: none;
   }
 }
 

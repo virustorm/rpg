@@ -43,6 +43,7 @@ export default class GameStart extends Component {
 							X
 						</button>
 						<div className="start-modoStatDiv">
+							<h1 className="start-modoStatTitle">Stats</h1>
 							<ul className="start-modoStatList">
 								<li>Talent: {baseStat.yourTalent}</li>
 								<li>HP: {baseStat.hp}</li>
@@ -53,44 +54,46 @@ export default class GameStart extends Component {
 							</ul>
 						</div>
 						<div className="start-modoEquipDiv">
-							<div>
-								<div className="start-modoEquipBox start-modoEquipBox-1" />
-								<div className="start-modoEquipBox start-modoEquipBox-2" />
-							</div>
-							<div>
-								<div className="start-modoEquipBox start-modoEquipBox-3" />
-								<div className="start-modoEquipBox start-modoEquipBox-4" />
+							<h1 className="start-modoEquipTitle">Equips</h1>
+							<div className="start-modoEquipaDiv">
+								<div>
+									<div className="start-modoEquipBox start-modoEquipBox-1" />
+									<div className="start-modoEquipBox start-modoEquipBox-2" />
+								</div>
+								<div>
+									<div className="start-modoEquipBox start-modoEquipBox-3" />
+									<div className="start-modoEquipBox start-modoEquipBox-4" />
+								</div>
 							</div>
 						</div>
-						<div className="start-modoInv">
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
-							<div className="start-modoInvBox" />
+						<div className="start-modoInvDiv">
+							<h1 className="start-modoInvTitle">Inventory</h1>
+							<div className="start-modoInv">
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox" />
+							</div>
 						</div>
 					</div>
 				</div>
