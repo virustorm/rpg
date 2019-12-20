@@ -163,6 +163,16 @@
 	&-modoLiExp {
 		margin-bottom: 10px;
 	}
+	&-monsterDiv {
+		position: absolute;
+		top: 10vh;
+		left: -100vw;
+		animation: moveRight 2s 5s forwards;
+		& img {
+			height: 50vh;
+			width: 40vw;
+		}
+	}
 }
 @keyframes shrinkIntoIcon {
 	0% {
@@ -181,5 +191,10 @@
 		height: 10vh;
 		width: 100%;
 		background-color: rgba($color: black, $alpha: 0.7);
+	}
+}
+@keyframes moveRight {
+	100% {
+		left: 0;
 	}
 }

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import inventory from '../assets/icons/backpack.svg';
 
-const baseStat = JSON.parse(localStorage.getItem('characterBaseStats'));
+import mob1 from '../assets/images/monster1.jpg';
+import mob2 from '../assets/images/monster2.jpg';
 
+const baseStat = JSON.parse(localStorage.getItem('characterBaseStats'));
+const mobArray = [ mob1, mob2 ];
 export default class GameStart extends Component {
 	constructor(props) {
 		super(props);
@@ -10,7 +13,8 @@ export default class GameStart extends Component {
 			backpackDisplay: 'none',
 			lvl: 1,
 			currentExp: 0,
-			totalExp: 10
+			totalExp: 10,
+			currentMonster: mobArray[0]
 		};
 	}
 
@@ -104,6 +108,14 @@ export default class GameStart extends Component {
 								<div className="start-modoInvBox" />
 							</div>
 						</div>
+					</div>
+				</div>
+				<div className="start-monsterDiv">
+					<img src={this.state.currentMonster} alt="monster" />
+					<div>
+						<button type="button">Attack</button>
+						<button type="button">Inventory</button>
+						<button type="button">Magic</button>
 					</div>
 				</div>
 				<footer className="start-inventory">
