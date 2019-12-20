@@ -128,8 +128,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-animation: shrinkIntoIcon 3s forwards;
-          animation: shrinkIntoIcon 3s forwards;
+  -webkit-animation: shrinkIntoIcon 3s 2s forwards;
+          animation: shrinkIntoIcon 3s 2s forwards;
 }
 
 .start-title {
@@ -320,6 +320,27 @@
   width: 100%;
 }
 
+.start-header {
+  height: 10vh;
+  width: 100%;
+  -webkit-animation: turnBlack 1s 3s forwards;
+          animation: turnBlack 1s 3s forwards;
+}
+
+.start-footer {
+  height: 10vh;
+  width: 100%;
+  -webkit-animation: turnBlack 1s 3s forwards;
+          animation: turnBlack 1s 3s forwards;
+  position: absolute;
+  bottom: 0;
+  z-index: -2;
+}
+
+.start-modoLiExp {
+  margin-bottom: 10px;
+}
+
 @-webkit-keyframes shrinkIntoIcon {
   0% {
     -webkit-transform: scale(1);
@@ -350,9 +371,26 @@
   }
 }
 
+@-webkit-keyframes turnBlack {
+  100% {
+    height: 10vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes turnBlack {
+  100% {
+    height: 10vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 /*# sourceMappingURL=main.css.map */

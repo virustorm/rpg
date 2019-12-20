@@ -7,7 +7,10 @@ export default class GameStart extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			backpackDisplay: 'none'
+			backpackDisplay: 'none',
+			lvl: 1,
+			currentExp: 0,
+			totalExp: 10
 		};
 	}
 
@@ -24,6 +27,7 @@ export default class GameStart extends Component {
 
 		return (
 			<div className="start">
+				<header className="start-header" />
 				<div className="start-statDiv">
 					<h2 className="start-title">{baseStat.name}</h2>
 					<div>
@@ -45,6 +49,11 @@ export default class GameStart extends Component {
 						<div className="start-modoStatDiv">
 							<h1 className="start-modoStatTitle">Stats</h1>
 							<ul className="start-modoStatList">
+								<li>{baseStat.name}</li>
+								<li>LV: {this.state.lvl}</li>
+								<li className="start-modoLiExp">
+									Exp: {this.state.currentExp}/{this.state.totalExp}
+								</li>
 								<li>Talent: {baseStat.yourTalent}</li>
 								<li>HP: {baseStat.hp}</li>
 								<li>MP: {baseStat.mp}</li>
@@ -100,6 +109,7 @@ export default class GameStart extends Component {
 				<footer className="start-inventory">
 					<img className="start-inventoryImg" src={inventory} onClick={this.backpackClick} alt="backpack" />
 				</footer>
+				<div className="start-footer" />
 			</div>
 		);
 	}
