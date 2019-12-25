@@ -347,11 +347,29 @@
   left: -100vw;
   -webkit-animation: moveRight 2s 5s forwards;
           animation: moveRight 2s 5s forwards;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .start-monsterDiv img {
   height: 50vh;
   width: 40vw;
+}
+
+.start-monsterDiv h3 {
+  margin-left: 30px;
+}
+
+.start-actionDiv {
+  position: absolute;
+  top: 70vh;
+  right: -100vw;
+  -webkit-animation: moveLeft 2s 5s forwards;
+          animation: moveLeft 2s 5s forwards;
 }
 
 @-webkit-keyframes shrinkIntoIcon {
@@ -409,6 +427,18 @@
 @keyframes moveRight {
   100% {
     left: 0;
+  }
+}
+
+@-webkit-keyframes moveLeft {
+  100% {
+    right: 10vw;
+  }
+}
+
+@keyframes moveLeft {
+  100% {
+    right: 10vw;
   }
 }
 

@@ -14,8 +14,18 @@ export default class GameStart extends Component {
 			lvl: 1,
 			currentExp: 0,
 			totalExp: 10,
-			currentMonster: mobArray[0]
+			currentMonster: mobArray[0],
+			monsterCurrentHp: 10,
+			monsterTotalHp: 10,
+			currentStage: 1,
+			hp: baseStat.hp
 		};
+	}
+
+	componentDidUpdate() {
+		if (this.state.monsterCurrentHp === 0) {
+			this.setState({ monsterCurrentHp: 10 });
+		}
 	}
 
 	backpackClick = () => {
@@ -24,6 +34,15 @@ export default class GameStart extends Component {
 
 	modoClose = () => {
 		this.setState({ backpackDisplay: 'none' });
+	};
+
+	attackMonster = () => {
+		let dmg = Math.ceil(baseStat.str * 1.12);
+		let monsterHpLeft = this.state.monsterCurrentHp - dmg;
+		console.log(dmg);
+		console.log(monsterHpLeft);
+		let heroHp = this.state.hp - this.state.currentStage * 2;
+		this.setState({ monsterCurrentHp: monsterHpLeft, hp: heroHp });
 	};
 
 	render() {
@@ -112,11 +131,19 @@ export default class GameStart extends Component {
 				</div>
 				<div className="start-monsterDiv">
 					<img src={this.state.currentMonster} alt="monster" />
-					<div>
-						<button type="button">Attack</button>
-						<button type="button">Inventory</button>
-						<button type="button">Magic</button>
-					</div>
+					<h3>
+						HP: {this.state.monsterCurrentHp}/{this.state.monsterTotalHp}
+					</h3>
+				</div>
+				<div className="start-actionDiv">
+					<h3>
+						HP:{this.state.hp}/{baseStat.hp}
+					</h3>
+					<button type="button" onClick={this.attackMonster}>
+						Attack
+					</button>
+					<button type="button">Inventory</button>
+					<button type="button">Magic</button>
 				</div>
 				<footer className="start-inventory">
 					<img className="start-inventoryImg" src={inventory} onClick={this.backpackClick} alt="backpack" />

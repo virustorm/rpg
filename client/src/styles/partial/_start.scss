@@ -168,10 +168,22 @@
 		top: 10vh;
 		left: -100vw;
 		animation: moveRight 2s 5s forwards;
+		display: flex;
+		align-items: center;
+
 		& img {
 			height: 50vh;
 			width: 40vw;
 		}
+		& h3 {
+			margin-left: 30px;
+		}
+	}
+	&-actionDiv {
+		position: absolute;
+		top: 70vh;
+		right: -100vw;
+		animation: moveLeft 2s 5s forwards;
 	}
 }
 @keyframes shrinkIntoIcon {
@@ -196,5 +208,10 @@
 @keyframes moveRight {
 	100% {
 		left: 0;
+	}
+}
+@keyframes moveLeft {
+	100% {
+		right: 10vw;
 	}
 }
