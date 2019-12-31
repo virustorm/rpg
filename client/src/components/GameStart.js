@@ -18,13 +18,24 @@ export default class GameStart extends Component {
 			monsterCurrentHp: 10,
 			monsterTotalHp: 10,
 			currentStage: 1,
-			hp: baseStat.hp
+			hp: baseStat.hp,
+			currentHP: baseStat.hp,
+			retry: 'none'
 		};
 	}
 
 	componentDidUpdate() {
-		if (this.state.monsterCurrentHp === 0) {
-			this.setState({ monsterCurrentHp: 10 });
+		if (this.state.monsterCurrentHp <= 0) {
+			let newHp = Math.ceil(this.state.monsterTotalHp * 1.35);
+			this.setState({
+				monsterCurrentHp: newHp,
+				monsterTotalHp: newHp,
+				currentStage: this.state.currentStage + 1
+			});
+		}
+		if (this.state.currentHP <= 0) {
+			this.setState({ retry: 'flex', currentHP: 1 });
+			console.log('somet');
 		}
 	}
 
@@ -41,8 +52,17 @@ export default class GameStart extends Component {
 		let monsterHpLeft = this.state.monsterCurrentHp - dmg;
 		console.log(dmg);
 		console.log(monsterHpLeft);
-		let heroHp = this.state.hp - this.state.currentStage * 2;
-		this.setState({ monsterCurrentHp: monsterHpLeft, hp: heroHp });
+		let heroHp = this.state.currentHP - this.state.currentStage * 2;
+		this.setState({ monsterCurrentHp: monsterHpLeft, currentHP: heroHp });
+	};
+
+	diedGame = () => {
+		window.location.href = 'http://localhost:3000';
+	};
+
+	restartGame = () => {
+		window.location.reload();
+		console.log('something');
 	};
 
 	render() {
@@ -137,7 +157,7 @@ export default class GameStart extends Component {
 				</div>
 				<div className="start-actionDiv">
 					<h3>
-						HP:{this.state.hp}/{baseStat.hp}
+						HP:{this.state.currentHP}/{this.state.hp}
 					</h3>
 					<button type="button" onClick={this.attackMonster}>
 						Attack
@@ -145,6 +165,20 @@ export default class GameStart extends Component {
 					<button type="button">Inventory</button>
 					<button type="button">Magic</button>
 				</div>
+				<div className="start-BigRetryDiv" style={{ display: this.state.retry }}>
+					<div className="start-retryDiv">
+						<h3 className="start-retryTitle">you died</h3>
+						<div className="start-retryButtonDiv">
+							<button type="button" onClick={this.restartGame}>
+								Restart
+							</button>
+							<button type="button" onClick={this.diedGame}>
+								Die in vain
+							</button>
+						</div>
+					</div>
+				</div>
+
 				<footer className="start-inventory">
 					<img className="start-inventoryImg" src={inventory} onClick={this.backpackClick} alt="backpack" />
 				</footer>
