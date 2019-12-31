@@ -188,6 +188,13 @@
 	&-retryDiv {
 		position: relative;
 		background-color: rgba($color: white, $alpha: 0.9);
+		height: 30vh;
+		width: 30vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-transform: capitalize;
 	}
 	&-BigRetryDiv {
 		position: absolute;
@@ -200,6 +207,21 @@
 		top: 0;
 		left: 0;
 		z-index: 1;
+	}
+	&-retryButtonDiv {
+		& button {
+			margin: 0 10px;
+			height: 30px;
+			width: 100px;
+			border: 1px solid black;
+			border-radius: 10px;
+			background-color: transparent;
+			&:hover {
+				background-color: black;
+				color: white;
+				cursor: pointer;
+			}
+		}
 	}
 }
 @keyframes shrinkIntoIcon {

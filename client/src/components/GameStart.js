@@ -14,12 +14,12 @@ export default class GameStart extends Component {
 			lvl: 1,
 			currentExp: 0,
 			totalExp: 10,
-			currentMonster: mobArray[0],
 			monsterCurrentHp: 10,
 			monsterTotalHp: 10,
 			currentStage: 1,
 			hp: baseStat.hp,
 			currentHP: baseStat.hp,
+			// currentMonster: mobArray[this.state.currentStage - 1],
 			retry: 'none'
 		};
 	}
@@ -150,7 +150,7 @@ export default class GameStart extends Component {
 					</div>
 				</div>
 				<div className="start-monsterDiv">
-					<img src={this.state.currentMonster} alt="monster" />
+					<img src={mobArray[this.state.currentStage - 1]} alt="monster" />
 					<h3>
 						HP: {this.state.monsterCurrentHp}/{this.state.monsterTotalHp}
 					</h3>
