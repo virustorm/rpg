@@ -3,9 +3,11 @@ import inventory from '../assets/icons/backpack.svg';
 
 import mob1 from '../assets/images/monster1.jpg';
 import mob2 from '../assets/images/monster2.jpg';
+import mob3 from '../assets/images/monster3.jpg';
+import mob4 from '../assets/images/monster4.jpg';
 
 const baseStat = JSON.parse(localStorage.getItem('characterBaseStats'));
-const mobArray = [ mob1, mob2 ];
+const mobArray = [ mob1, mob2, mob3, mob4 ];
 export default class GameStart extends Component {
 	constructor(props) {
 		super(props);
@@ -20,18 +22,48 @@ export default class GameStart extends Component {
 			hp: baseStat.hp,
 			currentHP: baseStat.hp,
 			// currentMonster: mobArray[this.state.currentStage - 1],
-			retry: 'none'
+			retry: 'none',
+			mp: baseStat.mp,
+			str: baseStat.str,
+			dex: baseStat.dex,
+			int: baseStat.int
 		};
 	}
 
 	componentDidUpdate() {
 		if (this.state.monsterCurrentHp <= 0) {
-			let newHp = Math.ceil(this.state.monsterTotalHp * 1.35);
-			this.setState({
-				monsterCurrentHp: newHp,
-				monsterTotalHp: newHp,
-				currentStage: this.state.currentStage + 1
-			});
+			let newMonsterHp = Math.ceil(this.state.monsterTotalHp * 1.35);
+			let expGain = Math.ceil((this.state.currentStage + 4) * 2);
+			let hpRegain = this.state.currentHP + this.state.currentStage + this.state.lvl;
+			let checkLvl = this.state.currentExp + expGain;
+			if (checkLvl >= this.state.totalExp) {
+				console.log('changing');
+				if (baseStat.talent == 'str') {
+					let newTotalExp = Math.ceil(this.state.lvl + this.state.currentStage + this.state.totalExp);
+					let newLvl = Math.ceil(this.state.lvl + 1);
+					let newStr = this.state.str + 3;
+					let newDex = this.state.dex + 1;
+					let newInt = this.state.int + 1;
+					let newHeroHp = this.state.hp + 4;
+					console.log(newDex);
+					let newMp = this.state.mp + 1;
+					this.setState({
+						currentHP: hpRegain,
+						hp: newHeroHp,
+						dex: newDex,
+						str: newStr,
+						int: newInt,
+						mp: newMp,
+						lvl: newLvl,
+						totalExp: newTotalExp,
+						currentExp: 0,
+						monsterCurrentHp: newMonsterHp,
+						monsterTotalHp: newMonsterHp,
+						currentStage: this.state.currentStage + 1
+					});
+					console.log(this.state);
+				}
+			}
 		}
 		if (this.state.currentHP <= 0) {
 			this.setState({ retry: 'flex', currentHP: 1 });
@@ -48,7 +80,7 @@ export default class GameStart extends Component {
 	};
 
 	attackMonster = () => {
-		let dmg = Math.ceil(baseStat.str * 1.12);
+		let dmg = Math.ceil(this.state.str * 1.12);
 		let monsterHpLeft = this.state.monsterCurrentHp - dmg;
 		console.log(dmg);
 		console.log(monsterHpLeft);
@@ -76,11 +108,11 @@ export default class GameStart extends Component {
 					<div>
 						<ul className="start-statList">
 							<li>Talent: {baseStat.yourTalent}</li>
-							<li>HP: {baseStat.hp}</li>
-							<li>MP: {baseStat.mp}</li>
-							<li>STR: {baseStat.str}</li>
-							<li>DEX: {baseStat.dex}</li>
-							<li>INT: {baseStat.int}</li>
+							<li>HP: {this.state.hp}</li>
+							<li>MP: {this.state.mp}</li>
+							<li>STR: {this.state.str}</li>
+							<li>DEX: {this.state.dex}</li>
+							<li>INT: {this.state.int}</li>
 						</ul>
 					</div>
 				</div>
@@ -98,11 +130,11 @@ export default class GameStart extends Component {
 									Exp: {this.state.currentExp}/{this.state.totalExp}
 								</li>
 								<li>Talent: {baseStat.yourTalent}</li>
-								<li>HP: {baseStat.hp}</li>
-								<li>MP: {baseStat.mp}</li>
-								<li>STR: {baseStat.str}</li>
-								<li>DEX: {baseStat.dex}</li>
-								<li>INT: {baseStat.int}</li>
+								<li>HP: {this.state.hp}</li>
+								<li>MP: {this.state.mp}</li>
+								<li>STR: {this.state.str}</li>
+								<li>DEX: {this.state.dex}</li>
+								<li>INT: {this.state.int}</li>
 							</ul>
 						</div>
 						<div className="start-modoEquipDiv">
@@ -159,6 +191,14 @@ export default class GameStart extends Component {
 					<h3>
 						HP:{this.state.currentHP}/{this.state.hp}
 					</h3>
+					<div className="start-expDiv">
+						<h3>LVL: {this.state.lvl}</h3>
+
+						<h3>
+							EXP: {this.state.currentExp}/{this.state.totalExp}
+						</h3>
+					</div>
+
 					<button type="button" onClick={this.attackMonster}>
 						Attack
 					</button>
