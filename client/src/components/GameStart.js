@@ -6,6 +6,8 @@ import mob2 from '../assets/images/monster2.jpg';
 import mob3 from '../assets/images/monster3.jpg';
 import mob4 from '../assets/images/monster4.jpg';
 
+import HealthPot from '../assets/icons/health-potion.svg';
+
 const baseStat = JSON.parse(localStorage.getItem('characterBaseStats'));
 const mobArray = [ mob1, mob2, mob3, mob4 ];
 export default class GameStart extends Component {
@@ -26,48 +28,61 @@ export default class GameStart extends Component {
 			mp: baseStat.mp,
 			str: baseStat.str,
 			dex: baseStat.dex,
-			int: baseStat.int
+			int: baseStat.int,
+			blinkRedDiv: '',
+			ownBlinkDiv: '',
+			monsterHiddenHp: 10,
+			item1Img: ''
 		};
 	}
 
 	componentDidUpdate() {
-		if (this.state.monsterCurrentHp <= 0) {
-			let newMonsterHp = Math.ceil(this.state.monsterTotalHp * 1.35);
-			let expGain = Math.ceil((this.state.currentStage + 4) * 2);
-			let hpRegain = this.state.currentHP + this.state.currentStage + this.state.lvl;
-			let checkLvl = this.state.currentExp + expGain;
-			if (checkLvl >= this.state.totalExp) {
-				console.log('changing');
-				if (baseStat.talent == 'str') {
-					let newTotalExp = Math.ceil(this.state.lvl + this.state.currentStage + this.state.totalExp);
-					let newLvl = Math.ceil(this.state.lvl + 1);
-					let newStr = this.state.str + 3;
-					let newDex = this.state.dex + 1;
-					let newInt = this.state.int + 1;
-					let newHeroHp = this.state.hp + 4;
-					console.log(newDex);
-					let newMp = this.state.mp + 1;
-					this.setState({
-						currentHP: hpRegain,
-						hp: newHeroHp,
-						dex: newDex,
-						str: newStr,
-						int: newInt,
-						mp: newMp,
-						lvl: newLvl,
-						totalExp: newTotalExp,
-						currentExp: 0,
-						monsterCurrentHp: newMonsterHp,
-						monsterTotalHp: newMonsterHp,
-						currentStage: this.state.currentStage + 1
-					});
-					console.log(this.state);
+		if (this.state.monsterHiddenHp <= 0) {
+			this.delay = setTimeout(() => {
+				let newMonsterHp = Math.ceil(this.state.monsterTotalHp * 1.35);
+				let expGain = Math.ceil((this.state.currentStage + 4) * 2);
+				let hpRegain = this.state.currentHP + this.state.currentStage + this.state.lvl + 2;
+				let checkLvl = this.state.currentExp + expGain;
+				const randomNumber = (max) => {
+					return Math.floor(Math.random() * Math.floor(max));
+				};
+				let randomNumberResult = randomNumber(9);
+				console.log(randomNumberResult);
+				if (randomNumberResult === 1 || randomNumberResult === 2 || randomNumberResult === 3) {
+					this.setState({ item1Img: HealthPot });
 				}
-			}
+				if (checkLvl >= this.state.totalExp) {
+					if (baseStat.talent === 'str') {
+						let newTotalExp = Math.ceil(this.state.lvl + this.state.currentStage + this.state.totalExp);
+						let newLvl = Math.ceil(this.state.lvl + 1);
+						let newStr = this.state.str + 3;
+						let newDex = this.state.dex + 1;
+						let newInt = this.state.int + 1;
+						let newHeroHp = this.state.hp + 4;
+						let newMp = this.state.mp + 1;
+						this.setState({
+							currentHP: hpRegain,
+							hp: newHeroHp,
+							dex: newDex,
+							str: newStr,
+							int: newInt,
+							mp: newMp,
+							lvl: newLvl,
+							totalExp: newTotalExp,
+							currentExp: 0,
+							monsterCurrentHp: newMonsterHp,
+							monsterTotalHp: newMonsterHp,
+							currentStage: this.state.currentStage + 1,
+							monsterHiddenHp: newMonsterHp
+						});
+					}
+				}
+			}, 1500);
+			this.setState({ monsterHiddenHp: 1 });
 		}
+
 		if (this.state.currentHP <= 0) {
 			this.setState({ retry: 'flex', currentHP: 1 });
-			console.log('somet');
 		}
 	}
 
@@ -82,10 +97,20 @@ export default class GameStart extends Component {
 	attackMonster = () => {
 		let dmg = Math.ceil(this.state.str * 1.12);
 		let monsterHpLeft = this.state.monsterCurrentHp - dmg;
-		console.log(dmg);
-		console.log(monsterHpLeft);
 		let heroHp = this.state.currentHP - this.state.currentStage * 2;
-		this.setState({ monsterCurrentHp: monsterHpLeft, currentHP: heroHp });
+		this.setState({
+			blinkRedDiv: 'start-monsterHPDiv',
+			ownBlinkDiv: 'start-ownHPDiv'
+		});
+		this.monsterDelay = setTimeout(() => {
+			this.setState({
+				monsterCurrentHp: monsterHpLeft,
+				monsterHiddenHp: monsterHpLeft
+			});
+		}, 500);
+		this.delay = setTimeout(() => {
+			this.setState({ currentHP: heroHp });
+		}, 1500);
 	};
 
 	diedGame = () => {
@@ -94,11 +119,17 @@ export default class GameStart extends Component {
 
 	restartGame = () => {
 		window.location.reload();
-		console.log('something');
+	};
+
+	ownHPAnimationEnd = () => {
+		this.setState({ ownBlinkDiv: '' });
+	};
+	monsterHPAnimationEnd = () => {
+		this.setState({ blinkRedDiv: '' });
 	};
 
 	render() {
-		console.log(baseStat);
+		// console.log(baseStat);
 
 		return (
 			<div className="start">
@@ -153,7 +184,9 @@ export default class GameStart extends Component {
 						<div className="start-modoInvDiv">
 							<h1 className="start-modoInvTitle">Inventory</h1>
 							<div className="start-modoInv">
-								<div className="start-modoInvBox" />
+								<div className="start-modoInvBox">
+									<img src={this.state.item1Img} alt="" />
+								</div>
 								<div className="start-modoInvBox" />
 								<div className="start-modoInvBox" />
 								<div className="start-modoInvBox" />
@@ -182,13 +215,13 @@ export default class GameStart extends Component {
 					</div>
 				</div>
 				<div className="start-monsterDiv">
-					<img src={mobArray[this.state.currentStage - 1]} alt="monster" />
-					<h3>
+					<img className="start-monsterImgBlink" src={mobArray[this.state.currentStage - 1]} alt="monster" />
+					<h3 className={this.state.blinkRedDiv} onAnimationEnd={this.monsterHPAnimationEnd}>
 						HP: {this.state.monsterCurrentHp}/{this.state.monsterTotalHp}
 					</h3>
 				</div>
 				<div className="start-actionDiv">
-					<h3>
+					<h3 className={this.state.ownBlinkDiv} onAnimationEnd={this.ownHPAnimationEnd}>
 						HP:{this.state.currentHP}/{this.state.hp}
 					</h3>
 					<div className="start-expDiv">

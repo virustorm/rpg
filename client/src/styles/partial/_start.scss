@@ -230,6 +230,29 @@
 			margin: 0 0 10px 0;
 		}
 	}
+	&-monsterHPDiv {
+		animation: blinkRed 1s forwards;
+	}
+	&-ownHPDiv {
+		animation: delayedBlinkRed 1s forwards;
+		animation-delay: 1s;
+	}
+}
+@keyframes blinkRed {
+	50% {
+		background-color: rgba($color: red, $alpha: 0.8);
+	}
+	100% {
+		background-color: transparent;
+	}
+}
+@keyframes delayedBlinkRed {
+	50% {
+		background-color: rgba($color: red, $alpha: 0.8);
+	}
+	100% {
+		background-color: transparent;
+	}
 }
 @keyframes shrinkIntoIcon {
 	0% {
