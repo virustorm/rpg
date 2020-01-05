@@ -5,11 +5,12 @@ import mob1 from '../assets/images/monster1.jpg';
 import mob2 from '../assets/images/monster2.jpg';
 import mob3 from '../assets/images/monster3.jpg';
 import mob4 from '../assets/images/monster4.jpg';
+import mob5 from '../assets/images/monster1.jpg';
 
 import HealthPot from '../assets/icons/health-potion.svg';
 
 const baseStat = JSON.parse(localStorage.getItem('characterBaseStats'));
-const mobArray = [ mob1, mob2, mob3, mob4 ];
+const mobArray = [ mob1, mob2, mob3, mob4, mob5 ];
 export default class GameStart extends Component {
 	constructor(props) {
 		super(props);
@@ -32,7 +33,8 @@ export default class GameStart extends Component {
 			blinkRedDiv: '',
 			ownBlinkDiv: '',
 			monsterHiddenHp: 10,
-			item1Img: ''
+			item1Img: '',
+			item1Name: ''
 		};
 	}
 
@@ -46,10 +48,12 @@ export default class GameStart extends Component {
 				const randomNumber = (max) => {
 					return Math.floor(Math.random() * Math.floor(max));
 				};
-				let randomNumberResult = randomNumber(9);
+				let randomNumberResult = randomNumber(7);
+				let newStage = this.state.currentStage + 1;
+				console.log(newStage);
 				console.log(randomNumberResult);
 				if (randomNumberResult === 1 || randomNumberResult === 2 || randomNumberResult === 3) {
-					this.setState({ item1Img: HealthPot });
+					this.setState({ item1Img: HealthPot, item1Name: 'HealthPot' });
 				}
 				if (checkLvl >= this.state.totalExp) {
 					if (baseStat.talent === 'str') {
@@ -72,8 +76,9 @@ export default class GameStart extends Component {
 							currentExp: 0,
 							monsterCurrentHp: newMonsterHp,
 							monsterTotalHp: newMonsterHp,
-							currentStage: this.state.currentStage + 1,
-							monsterHiddenHp: newMonsterHp
+							currentStage: newStage,
+							monsterHiddenHp: newMonsterHp,
+							ownBlinkDiv: 'start-ownHPGain'
 						});
 					}
 				}
@@ -127,7 +132,13 @@ export default class GameStart extends Component {
 	monsterHPAnimationEnd = () => {
 		this.setState({ blinkRedDiv: '' });
 	};
-
+	InvClick = () => {
+		console.log('click');
+		if (this.state.item1Name === 'HealthPot') {
+			let ownHP = this.state.currentHP + 10;
+			this.setState({ currentHP: ownHP });
+		}
+	};
 	render() {
 		// console.log(baseStat);
 
@@ -185,7 +196,12 @@ export default class GameStart extends Component {
 							<h1 className="start-modoInvTitle">Inventory</h1>
 							<div className="start-modoInv">
 								<div className="start-modoInvBox">
-									<img src={this.state.item1Img} alt="" />
+									<img
+										src={this.state.item1Img}
+										alt=""
+										className="start-modoInvBoxImg"
+										onClick={this.InvClick}
+									/>
 								</div>
 								<div className="start-modoInvBox" />
 								<div className="start-modoInvBox" />

@@ -312,6 +312,10 @@
   margin: 5px;
 }
 
+.start-modoInvBoxImg:hover {
+  cursor: pointer;
+}
+
 .start-modoStatTitle {
   position: absolute;
   left: 1%;
@@ -450,6 +454,29 @@
           animation: delayedBlinkRed 1s forwards;
   -webkit-animation-delay: 1s;
           animation-delay: 1s;
+}
+
+.start-ownHPGain {
+  -webkit-animation: blinkGreen 1s forwards;
+          animation: blinkGreen 1s forwards;
+}
+
+@-webkit-keyframes blinkGreen {
+  50% {
+    background-color: rgba(0, 128, 0, 0.8);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes blinkGreen {
+  50% {
+    background-color: rgba(0, 128, 0, 0.8);
+  }
+  100% {
+    background-color: transparent;
+  }
 }
 
 @-webkit-keyframes blinkRed {

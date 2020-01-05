@@ -138,6 +138,14 @@
 		height: 50px;
 		border: 1px solid black;
 		margin: 5px;
+		// &:hover {
+		// 	cursor: pointer;
+		// }
+	}
+	&-modoInvBoxImg {
+		&:hover {
+			cursor: pointer;
+		}
 	}
 	&-modoStatTitle {
 		position: absolute;
@@ -236,6 +244,17 @@
 	&-ownHPDiv {
 		animation: delayedBlinkRed 1s forwards;
 		animation-delay: 1s;
+	}
+	&-ownHPGain {
+		animation: blinkGreen 1s forwards;
+	}
+}
+@keyframes blinkGreen {
+	50% {
+		background-color: rgba($color: green, $alpha: 0.8);
+	}
+	100% {
+		background-color: transparent;
 	}
 }
 @keyframes blinkRed {
