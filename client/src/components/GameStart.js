@@ -9,6 +9,15 @@ import mob5 from '../assets/images/monster1.jpg';
 
 import HealthPot from '../assets/icons/health-potion.svg';
 
+// const itemList = [
+// 	{
+
+// 	},
+// 	{
+
+// 	}
+// ]
+
 const baseStat = JSON.parse(localStorage.getItem('characterBaseStats'));
 const mobArray = [ mob1, mob2, mob3, mob4, mob5 ];
 export default class GameStart extends Component {
@@ -86,13 +95,12 @@ export default class GameStart extends Component {
 					this.setState({
 						currentStage: newStage,
 						hp: hpRegain,
-						currentExp: expGain
+						currentExp: expGain,
+						monsterCurrentHp: newMonsterHp,
+						monsterTotalHp: newMonsterHp
 					});
-					console.log(this.state.currentStage);
 				}
 			}, 1500);
-			console.log('monster died');
-
 			this.setState({ monsterHiddenHp: 1 });
 		}
 
@@ -146,7 +154,7 @@ export default class GameStart extends Component {
 		console.log('click');
 		if (this.state.item1Name === 'HealthPot') {
 			let ownHP = this.state.currentHP + 10;
-			this.setState({ currentHP: ownHP });
+			this.setState({ currentHP: ownHP, item1Name: '', item1Img: '' });
 		}
 	};
 	render() {
