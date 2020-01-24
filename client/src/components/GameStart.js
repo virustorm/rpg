@@ -52,7 +52,7 @@ export default class GameStart extends Component {
 				let newStage = this.state.currentStage + 1;
 				console.log(newStage);
 				console.log(randomNumberResult);
-				if (randomNumberResult === 1 || randomNumberResult === 2 || randomNumberResult === 3) {
+				if (randomNumberResult < 6) {
 					this.setState({ item1Img: HealthPot, item1Name: 'HealthPot' });
 				}
 				if (checkLvl >= this.state.totalExp) {
@@ -80,9 +80,19 @@ export default class GameStart extends Component {
 							monsterHiddenHp: newMonsterHp,
 							ownBlinkDiv: 'start-ownHPGain'
 						});
+						console.log(this.state.currentStage);
 					}
+				} else {
+					this.setState({
+						currentStage: newStage,
+						hp: hpRegain,
+						currentExp: expGain
+					});
+					console.log(this.state.currentStage);
 				}
 			}, 1500);
+			console.log('monster died');
+
 			this.setState({ monsterHiddenHp: 1 });
 		}
 
@@ -141,7 +151,6 @@ export default class GameStart extends Component {
 	};
 	render() {
 		// console.log(baseStat);
-
 		return (
 			<div className="start">
 				<header className="start-header" />
